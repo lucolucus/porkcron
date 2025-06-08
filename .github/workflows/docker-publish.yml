@@ -5,9 +5,11 @@ on:
     branches:
       - main
     paths:
-      - 'docker/**'
+      - '**.py'
+      - 'Dockerfile'
       - '.github/workflows/docker-publish.yml'
-  workflow_dispatch: 
+
+  workflow_dispatch:
 
 jobs:
   docker:
@@ -31,7 +33,6 @@ jobs:
       - name: Build and push image
         uses: docker/build-push-action@v5
         with:
-          context: ./docker
-          file: ./docker/Dockerfile
+          context: .
           push: true
           tags: ghcr.io/${{ github.repository }}:latest
